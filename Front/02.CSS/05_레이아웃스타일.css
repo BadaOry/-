@@ -1,0 +1,321 @@
+/* 기본 스타일 테스트*/
+.size-test {
+    border: 2px solid red;
+}
+
+#fixed-size {
+    width: 200px;
+    /* height: 200px; */
+}
+
+#variable-size {
+    width: 50%;
+    height: 200px;
+}
+
+.display {
+    width: 150px;
+    height: 50px;
+    border: 2px solid black;
+    color: white;
+}
+
+#area1 {
+    background-color: red;
+}
+
+#area2 {
+    background-color: orange;
+}
+
+#area3 {
+    background-color: yellow;
+}
+
+#area4 {
+    background-color: green;
+}
+
+#area5 {
+    background-color: blue;
+}
+.display-inline {
+    display: inline;
+}
+
+/* ▼ display 클래스에 적용한 width 150px, height 50px이 적용 되는 인라인 요소 */
+.display-inline-block {
+    display: inline-block;
+}
+
+.display-block {
+    display: block;
+}
+
+/* 테두리 테스드 */
+.border {
+    width: 100px;
+    height: 100px;
+    border: 3px;
+}
+
+/* ▼ 테두리를 없앰 */
+#border-test1{
+    border-style: none;
+}
+
+/* ▼ 테두리를 숨김 */
+#border-test2{
+    border-style: hidden;
+    box-shadow: -10px -10px 10px -10px gray inset;
+}
+
+#border-test3{
+    border-style: dotted;
+}
+
+#border-test4{
+    border-style: dashed;
+    border-top-color: hotpink;
+}
+
+#border-test5{
+    border-style: double;
+    border-top-color: red;
+}
+
+#border-test6{
+    border-style: groove;
+    border-top-left-radius: 10px 20px;
+}
+
+#border-test7{
+    border-style: inset;
+    border-bottom-right-radius: 50px;
+}
+
+#border-test8{
+    border-style: outset;
+}
+
+#border-test9{
+    border-style: solid;
+}
+
+#border-test10{
+    border-style: ridge;
+}
+
+/* 여백 스타일 테스트 */
+.space {
+    width: 100px;
+    height: 100px;
+    background-color: beige;
+}
+
+#padding1 {
+    padding: 20px;
+}
+
+#padding2 {
+    padding-top: 50px;
+    padding-right: 100px;
+}
+
+#margin1 {
+    margin: 50px;
+}
+
+#margin2 {
+    /* ▼ margin1과 margin2 사이의 마진은 50px
+         : 상하 마진의 경우 중첩되지 않고, 더 큰쪽을 따라감 */
+    margin-top: 30px;
+    margin-left: 30px;
+
+}
+
+/* 포지셔닝 테스트 */
+.outer {
+    
+    /* width: 100px; */
+    /* height: 100px; */
+    position: relative;
+    /* ▼  - static을 기준으로 이동
+          - position속성이 relative가 아니면, 문서 흐름대로 static 자리에 있음
+          - top, bottom, left, right 가 0 인 relative 는 static과 같다*/
+    /* top: 100px; */
+    /* left: 100px; */
+    /* background-color: yellow; */
+    border: 1px solid;
+}
+
+#first {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    background-color: yellow;
+}
+
+#second {
+    /* ▼ absolute : 문서 흐름과 상관 없이, 내가 원하는 곳으로 이동시킬 수 있음
+                    단, 부모나 조상 중 static인 아닌 요소가 있어야 함
+                    ▷ 지금은 모두 static 요소이므로, 맨 위 body로 감 */
+    position: absolute; /* 빨간색이 사라짐 (초록 뒤에 있음) */
+    /* absolute 주고 top, bottom, left, right를 주면 static이 아닌 부모 요소를 찾아 헤멜것임
+       (아무것도 안주면 static 자리)   
+       ▶ 지금은 모두 static 요소이므로, <body> 가 기준이되어서 페이지 맨위로 올라감
+       ▷ 내 의도 : 노란 네모 (first) 위에 올리고 싶음
+       ▷ 기준을 부모로 잡으면 됨 
+       ▶ .outer에 relative 설정 */
+       top: 50px; 
+       left: 50px;
+    width: 200px;
+    height: 200px;
+    background-color: yellowgreen;
+}
+
+#third {
+    position: absolute;
+    /* ▷ 내 의도 : 노란 네모 (first) 위, 초록 네모 (second) 위에 올리고 싶음
+       ▷ 기준을 부모로 잡으면 됨 
+       ▶ .outer에 relative 설정 */
+    top: 100px;
+    left: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+#fixed-area {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    /* ▼ 화면 영역을 기준으로 위치가 고정 됨 */
+    /* position: fixed; */
+    /* ▼ 휠을 더 내려도 고정 됨 */
+    /* position: sticky; */
+    top: 50px;
+    left: 50px;
+}
+
+/* visbility 테스트 */
+.visibility {
+    width: 100px;
+    height: 100px;
+    border: 1px solid;
+    margin-bottom : 5px; 
+}
+
+#v-test1 {
+    background-color: hotpink;
+}
+
+#v-test2 {
+    /* ▼ 안보이는데 공간은 차지하고 있음 */
+    visibility: hidden;
+    /* ▼ 코드만 남아있고 존재가 아예 없어져버림 */
+    /* display: none; */
+    background-color: beige;
+}
+
+#v-test3 {
+    background-color: skyblue;
+}
+
+/* z-index 테스트 */
+.z-test {
+    width: 150px;
+    height: 150px;
+    border: 1px solid;
+    /* 부모로 한개로 감싸주고, position은 static이 아니어야하고
+       부모 안에서 원하는대로 이동하게 할 것임 
+       ▷ 그리고 포지션은 absolute로 바꿀 것임*/
+    position: absolute;
+}
+
+#z-outer {
+    position: relative;
+    height: 380px;
+}
+
+#z1 {
+    background-color: seagreen;
+    top: 100px;
+    left: 100px;
+    z-index: 2;
+}
+
+#z2 {
+    background-color: red;
+    top: 150px;
+    left: 150px;
+    
+}
+ #z3 {
+     background-color: violet;
+     top: 200px;
+     left: 200px;
+     z-index: 3;
+ }
+
+/* float 테스트 */
+.float-test {
+    border: 1px solid;
+    width: 100px;
+    height: 100px;
+    /* div는 블록요소라 한 라인에 있을 수 없는데,
+       float을 left를 주면 한 라인에 있을 수 있음 */
+    float: left;
+    margin-right: 3px;
+    margin-bottom: 10px;
+}
+
+
+/* 다단 스타일 테스트 */
+/* ▼ 클래스로 중복 속성 빼줄게요 */
+.column-wrap {
+    border: 1px solid;
+    height: 150px;
+    overflow: scroll;
+
+}
+
+#column1 {
+    column-width: 300px;
+    column-gap: 30px;
+}
+
+#column2 {
+    column-count: 6;
+    column-rule-style: dashed;
+    column-rule-color: orange;
+}
+
+#column2>h4 {
+    column-span: all;
+}
+
+/* 테이블 스타일 테스트 */
+table {
+    caption-side: bottom;
+    width: 300px;
+    height: 400px;
+    border: 1px solid;
+    /* border-collapse: collapse; */
+    border-spacing: 30px;
+    empty-cells: hide;
+    table-layout: fixed;
+    word-break: break-all;
+}
+
+td {
+    border: 1px solid;
+    width: 80px;
+    height : 100px;
+    text-align: center;
+    vertical-align: bottom; /* default가 middle */
+}
+
+
+
+

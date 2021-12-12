@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM (Browser Object Model)</title>
+    <style>
+        .area {
+            border: 1px solid;
+            margin-top: 5px;
+            width: 500px;
+            height: 300px;
+            overflow: scroll;
+        }
+
+        #timer {
+            font-size: 3em;
+            color: hotpink;
+        }
+        
+        #second {
+            font-size: 3.5em;
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>BOM (Browser Object Model)</h1>
+    
+    <hr>
+
+    <h2>Window 객체</h2>
+    <p>
+        : window 객체는 JavaScript의 최상위 객체이며,
+          브라우저 내의 모든 요소들과 객체를 포함 <br>
+
+        - BOM : location 객체, navigator 객체, history 객체, screen 객체 <br>
+        - DOM : document 객체
+    </p>
+
+    <h3>window.open</h3>
+
+    <button id='btn1'>실행 확인</button>
+
+    <h3>window 객체의 타이머 관련 메소드</h3>
+    <p>
+        : 특정 함수를 일정 시간이 경과된 이후에 호출할 수 있도록 제공되는 함수를 타이머라고 함
+    </p>
+
+    <h4>window.setTimeout()</h4>
+    <p>
+        : 일정 시간이 경과된 이후에 매개값으로 전달된 콜백 함수를 단 한번만 실행
+    </p>
+
+    <button id="btn2">실행 확인</button>
+
+    <h4>window.setInterval()</h4>
+    <p>
+        : 일정 시간이 경과된 이후에 매개값으로 전달된 콜백 함수를 반복해서 실행함
+    </p>
+
+    <button id="btnStart">실행</button>
+    <button id="btnStop">종료</button>
+
+    <div id="area1" class="area"></div>
+
+    <hr>
+
+    <h2>BOM (Browser Object Model)</h2>
+    <h3>location 객체</h3>
+    <p>
+        : 브라우저 주소 표시줄과 관련된 객체
+    </p>
+    
+    <button id="btn3">실행 확인</button>
+    <div id="area2" class="area"></div>
+
+    <h4>location.reload()</h4>
+    <p>
+        : 페이지를 새로 고침하는 메소드
+    </p>
+
+    <!-- 보통 첫번째 방법을 많이 씀 -->
+    <button onclick="location.reload()">새로 고침</button>
+    <button onclick="location.href = location.href">새로 고침</button>
+    <button onclick="location = location">새로 고침</button>
+
+    <h4>location.href</h4>
+    <p>
+        : 현재 페이지의 URL 주소를 가지고 있는 속성으로 
+          해당 속성의 값을 변경하여 페이지를 이동할 수 있음
+    </p>
+
+    <!-- 이왕이면 href 를 명시하는게 좋음 -->
+    <button onclick="location.href = 'https://www.naver.com';">네이버로 이동</button>
+    <button onclick="location = 'http://www.naver.com';">네이버로 이동</button>
+
+    <h4>location.assign(), location.replace()</h4>
+    <p>
+        : 두 메소드 모두 페이지를 이동시키지만
+          replace() 는 assign() 과 다르게 history에 기록되지 않음
+    </p>
+
+    <button onclick="location.assign('https://www.google.com')">구글로 이동</button>
+    <button onclick="location.replace('https://www.google.com')">구글로 이동</button>
+    
+    <h3>history 객체</h3>
+    <p>
+    : 브라우저의 방문 기록과 관련된 객체
+    </p>
+    
+    <!-- 
+    테스트를 위한 기본 세팅 : 
+        새창 열어서 주소창에 주소 입력에서 GOOGLE 접속  
+        ▷ 주소창에 주소 입력해서 BOM 열고 
+        ▷ 주소창에 주소 입력해서 naver 접속 
+        ▷ 뒤로 와서 다시 BOM 페이지 열음
+        ▶ BOM에서 뒤로가면 구글, 앞으로가면 네이버가 나와야함 -->
+    <button onclick="history.back();">back()</button>
+    <button onclick="history.forward();">forward()</button>
+    
+    <!-- 위 메소드 기능을 go() 메소드로 구현-->
+    <button onclick="history.go(-1)">go(-1)</button>
+    <button onclick="history.go(1)">go(1)</button>
+    
+    <h4>navigator 객체</h4>
+    <p>
+        : 웹 페이지를 실행하고 있는 브라우저에 대한 정보를 가진 객체
+    </p>
+    
+    <button id="btn4">실행 확인</button>
+    <div id="area3" class="area"></div>
+    
+    <h3>screen 객체</h3>
+    <p>
+        : 운영체제의 화면 (모니터) 의 정보를 가지는 객체 
+    </p>
+
+    <button id="btn5">실행 확인</button>
+    <div id="area4" class="area"></div>
+
+    <script src='07_BrowserObjectModel.js'></script>
+</body>
+</html>
