@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>색상 스타일</title>
+    <style>
+        body {
+            /* background-color: hotpink; */
+            /* background-color: #A1B809; */
+            /* background-color: rgb(255, 80, 80); */
+            /* background-color: rgba(255, 80, 80, .3); */
+            /* background-color: hsl(0, 50%, 50%); */
+            background-color: hsla(60, 100%, 50%, .3);
+        }
+
+        #div-bg {
+            width: 70%;
+            background-color: white;
+        }
+
+        .div-clip {
+            background-color: #ffffff;
+            margin: 30px;
+            padding: 30px;
+            width: 40%;
+            border: 15px dashed rgba(0, 0, 0, .3);
+        }
+        #div-clip1 {
+            background-clip: border-box;
+        }
+
+        #div-clip2 {
+            background-clip: padding-box;
+        }
+
+        #div-clip3 {
+            background-clip: content-box;
+        }
+
+        #div-bg-img {
+            border: 15px solid rgba(0, 0, 0, .2);
+            width: 70%;
+            height: 800px;
+            padding: 50px;
+            background-image: url("../resources/image/bgsample.PNG");
+           
+            /* 이미지 반복 설정 */
+            /* background-repeat: repeat;
+            background-repeat: repeat-x;
+            background-repeat: repeat-y; */
+            background-repeat: no-repeat;
+
+            /* 이미지 크기 설정 */
+            /* background-size: auto;
+            background-size: contain;
+            background-size: cover;
+            background-size: 300px 200px;
+            background-size: 100% 100%; */
+
+            /* 이미지 위치 설정 */
+            /* background-position: left top;
+            background-position: right top;
+            background-position: center top;
+            background-position: left center;
+            background-position: center center;
+            background-position: center;
+            background-position: left bottom;
+            background-position: right bottom;
+            background-position: center bottom;
+            background-position: 50% 50%; */
+            
+            /* 이미지 배치 기준 설정 */
+            /* background-origin: padding-box; 가 기준 */
+            /* background-origin: border-box;
+            background-origin: content-box; */
+
+            /* 이미지를 고정하도록 설정 */
+            /* background-attachment: scroll;
+            background-attachment: fixed; */
+
+        }    
+
+        
+    </style>
+</head>
+<body>
+    <h1>색상 스타일</h1>
+
+    <hr>
+
+    <h2>background-color</h2>
+    <div id="div-bg">
+        (광주=뉴스1) 박영래 기자,박준배 기자,고귀한 기자,전원 기자,이수민 기자 = 25일 오전 11시30분을 전후로 전국적으로 KT 유·무선 인터넷망에 장애가 발생하면서 광주와 전남에서도 시민들이 극심한 불편을 겪었다.
+        광주시청과 전남도청 등 주요 관공서를 비롯해 전남대병원·조선대병원 등 대형병원, 기업 사무실, 식당·마트 등 상가에서 업무가 마비됐다.
+        이날 오전 11시20분쯤 광주시청과 광주시의회 공무원들은 '인터넷이 되지 않는다'며 답답함을 호소했다. 휴대전화도 통화가 되지 않거나 끊겼다.
+        노트북 등을 사용하는 직원들은 LG 등 휴대전화 핫스팟을 통해 인터넷에 접속했으나 데스크탑 사용자들은 일손을 놓을 수밖에 없었다.
+        인터넷 복구를 기다리던 직원들은 점심 시간인 12시보다 30분 이른 11시30분부터 일찌감치 식당으로 향했다.
+        광주시의회 한 공무원은 "이렇게 전체적으로 인터넷과 휴대전화가 먹통인 경우는 처음인 것 같다"며 "우리의 일상에 인터넷 의존도가 이렇게 크다는 것도 처음 느꼈다"고 말했다.
+        전남도청도 같은 시각 인터넷 전산이 끊겨 혼란을 빚었다.
+    </div> 
+
+    <hr>
+
+    <h2>backgrond-clip</h2>
+    <div class="div-clip" id="div-clip1">
+        (광주=뉴스1) 박영래 기자,박준배 기자,고귀한 기자,전원 기자,이수민 기자 = 25일 오전 11시30분을 전후로 전국적으로 KT 유·무선 인터넷망에 장애가 발생하면서 광주와 전남에서도 시민들이 극심한 불편을 겪었다.
+        광주시청과 전남도청 등 주요 관공서를 비롯해 전남대병원·조선대병원 등 대형병원, 기업 사무실, 식당·마트 등 상가에서 업무가 마비됐다.
+        이날 오전 11시20분쯤 광주시청과 광주시의회 공무원들은 '인터넷이 되지 않는다'며 답답함을 호소했다. 휴대전화도 통화가 되지 않거나 끊겼다.
+        노트북 등을 사용하는 직원들은 LG 등 휴대전화 핫스팟을 통해 인터넷에 접속했으나 데스크탑 사용자들은 일손을 놓을 수밖에 없었다.
+        인터넷 복구를 기다리던 직원들은 점심 시간인 12시보다 30분 이른 11시30분부터 일찌감치 식당으로 향했다.
+        광주시의회 한 공무원은 "이렇게 전체적으로 인터넷과 휴대전화가 먹통인 경우는 처음인 것 같다"며 "우리의 일상에 인터넷 의존도가 이렇게 크다는 것도 처음 느꼈다"고 말했다.
+        전남도청도 같은 시각 인터넷 전산이 끊겨 혼란을 빚었다.
+    </div> 
+
+    <div class="div-clip" id="div-clip2">
+        (광주=뉴스1) 박영래 기자,박준배 기자,고귀한 기자,전원 기자,이수민 기자 = 25일 오전 11시30분을 전후로 전국적으로 KT 유·무선 인터넷망에 장애가 발생하면서 광주와 전남에서도 시민들이 극심한 불편을 겪었다.
+        광주시청과 전남도청 등 주요 관공서를 비롯해 전남대병원·조선대병원 등 대형병원, 기업 사무실, 식당·마트 등 상가에서 업무가 마비됐다.
+        이날 오전 11시20분쯤 광주시청과 광주시의회 공무원들은 '인터넷이 되지 않는다'며 답답함을 호소했다. 휴대전화도 통화가 되지 않거나 끊겼다.
+        노트북 등을 사용하는 직원들은 LG 등 휴대전화 핫스팟을 통해 인터넷에 접속했으나 데스크탑 사용자들은 일손을 놓을 수밖에 없었다.
+        인터넷 복구를 기다리던 직원들은 점심 시간인 12시보다 30분 이른 11시30분부터 일찌감치 식당으로 향했다.
+        광주시의회 한 공무원은 "이렇게 전체적으로 인터넷과 휴대전화가 먹통인 경우는 처음인 것 같다"며 "우리의 일상에 인터넷 의존도가 이렇게 크다는 것도 처음 느꼈다"고 말했다.
+        전남도청도 같은 시각 인터넷 전산이 끊겨 혼란을 빚었다.
+    </div> 
+
+    <div class="div-clip" id="div-clip3">
+        (광주=뉴스1) 박영래 기자,박준배 기자,고귀한 기자,전원 기자,이수민 기자 = 25일 오전 11시30분을 전후로 전국적으로 KT 유·무선 인터넷망에 장애가 발생하면서 광주와 전남에서도 시민들이 극심한 불편을 겪었다.
+        광주시청과 전남도청 등 주요 관공서를 비롯해 전남대병원·조선대병원 등 대형병원, 기업 사무실, 식당·마트 등 상가에서 업무가 마비됐다.
+        이날 오전 11시20분쯤 광주시청과 광주시의회 공무원들은 '인터넷이 되지 않는다'며 답답함을 호소했다. 휴대전화도 통화가 되지 않거나 끊겼다.
+        노트북 등을 사용하는 직원들은 LG 등 휴대전화 핫스팟을 통해 인터넷에 접속했으나 데스크탑 사용자들은 일손을 놓을 수밖에 없었다.
+        인터넷 복구를 기다리던 직원들은 점심 시간인 12시보다 30분 이른 11시30분부터 일찌감치 식당으로 향했다.
+        광주시의회 한 공무원은 "이렇게 전체적으로 인터넷과 휴대전화가 먹통인 경우는 처음인 것 같다"며 "우리의 일상에 인터넷 의존도가 이렇게 크다는 것도 처음 느꼈다"고 말했다.
+        전남도청도 같은 시각 인터넷 전산이 끊겨 혼란을 빚었다.
+    </div> 
+
+    <hr>
+
+    <h2>
+        background-image,
+        background-repeat,
+        background-size,
+        background-position,
+        background-origin,
+        background-attachemnt
+    </h2>
+
+    <div id="div-bg-img"></div>
+
+</body>
+</html>

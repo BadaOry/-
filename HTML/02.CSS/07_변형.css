@@ -1,0 +1,117 @@
+.trans-test {
+    width: 300px;
+    height: 250px;
+    margin-left: 50px;
+}
+
+/* 2차원 변형 테스트 */
+#trans2-1:hover {
+    -webkit-transform: translate(50px, 50px);
+    -ms-transform: translate(50px, 50px);
+    transform: translate(50px, 50px) ;
+}
+
+
+#trans2-2:hover {
+    transform: translateY(-50px);
+}
+
+#trans2-3:hover {
+    /* X Y를 한번에 쓰는 방법 두가지 */
+    transform: translate(50px, 50px);
+    /* transform: translateX(50px) translateY(50px); */
+}
+
+#trans2-4:hover {
+    transform: scaleX(.5);
+}
+
+#trans2-5:hover {
+    transform: scaleY(-.5);
+}
+
+#trans2-6:hover {
+    transform: scale(-.5);
+}
+
+#trans2-7:hover {
+    transform: rotate(45deg);
+}
+
+#trans2-8:hover {
+    transform: skewX(-20deg);
+}
+
+#trans2-9:hover {
+    transform: skewY(20deg);
+}
+
+#trans2-10:hover {
+    /* X Y를 한번에 쓰는 방법 두가지 */
+    transform: skew(10deg, 10deg);
+    /* transform: skewX(10deg) skewY(10deg); */
+}
+
+/* 3차원 변형 테스트 */
+#trans3-1:hover {
+    /* ▼ 300px 만큼 떨어져있는데 200px 만큼 나한테 가까이 온 것 */
+    transform: perspective(300px) translate3d(100px, 100px, 200px);
+}
+
+#trans3-2:hover {
+    transform: perspective(1000px) rotateZ(-500px);
+}
+
+#trans3-3:hover {
+    transform: perspective(300px) rotateX(30deg);
+}
+
+#trans3-4:hover {
+    transform: perspective(300px) rotateY(-180deg);
+}
+
+#trans3-5:hover {
+    transform: perspective(300px) rotateZ(30deg);
+}
+
+#trans3-6:hover {
+    transform: perspective(300px) rotate3d(1, 1, 1, 45deg);
+}
+
+/* transform-origin 테스트 */
+#left-top:hover {
+    /* ▼ 도는 기준이 왼쪽 위 모서리가 됨 */
+    transform-origin: left top;
+    transform: rotate(25deg);
+}
+
+#right-top:hover {
+    /* ▼ 도는 기준이 오른쪽 위 모서리가 됨 */
+    transform-origin: right top;
+    transform: rotate(25deg);
+}
+
+#left-bottom:hover {
+    /* ▼ 도는 기준이 왼쪽 아래 모서리가 됨 */
+    transform-origin: left bottom;
+    transform: rotate(25deg);
+}
+
+#right-bottom:hover {
+    /* ▼ 도는 기준이 오른쪽 아래 모서리가 됨 */
+    transform-origin: right bottom;
+    transform: rotate(25deg);
+}
+
+/* backface-visibility 테스트 */
+#back1:hover {
+    transform: rotateX(180deg);
+    /* ▼ 뒷모습 안보여주기 */
+    backface-visibility: hidden;
+}
+
+#back2:hover {
+    transform: rotateX(180deg);
+    /* ▼ 뒷모습 보여주기 */
+    backface-visibility: visible;
+}

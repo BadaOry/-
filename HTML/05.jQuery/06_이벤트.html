@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트</title>
+    <style>
+        .area{
+            border: 1px solid;
+            width: 150px;
+            height: 150px;
+            font-size: 1.5em;
+            text-align: center;
+            line-height: 140px;
+        }
+    </style>
+</head>
+<body>
+    <h1>이벤트</h1>
+
+    <hr>
+
+    <h2>1. 이벤트 연결</h2>
+
+    <h3>1) on() 과 off()</h3>
+    <p>
+        - on()  : 이벤트를 연결할 때 사용 <br>
+        - off() : 연결된 이벤트를 제거할 때 사용
+    </p>
+
+    <div id="area1" class="area">
+    </div>
+    
+    <h3>2) one() </h3>
+    <p>
+        : 이벤트를 한 번만 연결할 때 사용
+    </p>
+    
+    <div id="area2" class="area"></div>
+    
+    <h2>2. 키보드 이벤트</h2>
+
+    <h3>1) keydown(), keypress(), keyup()</h3>
+    
+    <textarea id="tarea1" cols="40" rows="5"></textarea>
+
+    <h3>2) 동적으로 글자 수 세기</h3>
+
+    <div>
+        <p><span id="counter">0</span> / <span id="maxLength">10</span></p>
+        <textarea id="tarea2" cols="70" rows="5"></textarea>
+    </div>
+
+    <h3>3) 동적으로 아이디 조건 확인</h3>
+
+    <label>아이디 : <input type="text" id="userId"></label>
+    <span id="idCheck"></span>
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/06_이벤트.js"></script>
+</body>
+</html>

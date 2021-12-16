@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼 관련 태그</title>
+</head>
+<body>
+    <h1>폼 관련 태그</h1>
+    <!--
+        <form> 태그
+            form 태그는 html에서 사용자가 입력할 수 있는 양식을 제공하는 태그
+            form 태그 내의 <input>태그를 통해서 사용자가 입력한 정보를 서버로 넘기면서 요청하는 역할
+
+            * action : 폼 내에 입력된 값들을 전달할 서버(페이지)에 대한 내용 기입
+            * method : get / post 방식으로 전송 방식을 지정
+                get : 서버에 사용자가 입력한 값을 전달하며, 
+                      요청 시 사용자가 입력한 값들을 url에 노출하는 방식
+                post : 서버에 사용자가 입력한 값을 전달하며,
+                       요청 시 사용자가 입력한 값을 url에 노출시키지 않는 방식
+            * autocomplete : 이전 입력 내용을 출력하는 기능
+                             생략하면 자동으로 출력 됨 (default : on, 각 태그별로 지정 가능)
+    -->
+    
+    <h3>폼 태그의 기본 구조</h3>
+    <form method="post<!--get -->">
+        <label>
+            <!--
+                name : form 태그 안에서 input 태그를 구분하는 역할
+                       나중에 서버로 값을 전달할 때 
+                       name 속성과 텍스트 필드에 작성된 값이 세트(key=value)로 넘어감
+            -->
+            검색할 내용 : <input type="text" size="10" name="search" autocomplete="off">
+        </label>
+    
+        <!--
+            submit 버튼을 눌렀을 때 method 요청 전송 방식으로
+            action에 지정한 서버로 사용자가 입력한 값 (key=value)을 전달
+        -->
+        <input type="submit" value="검색">
+    </form>
+
+    <hr>
+
+    <h4>fieldset : 폼 요소를 그룹으로 묶는 태그</h4>
+    <h4>legend : 묶은 폼 요소에 명칭을 붙이는 태그</h4>
+
+    <form>
+        <fieldset>
+            <legend>회원 정보</legend>
+
+            <label>아이디 : <input type="text" name="id"></label><br>
+            <label>패스워드 : <input type="password" name="pwd"></label><br>
+        </fieldset>
+
+        <p></p>
+
+        <fieldset>
+            <legend>배송 정보</legend>
+            
+            <label>수령인 : <input type="text" name="name"></label><br>
+            <label>주소 : <input type="text" name="address"></label><br>
+        </fieldset>
+        
+        <p></p>
+
+        <input type="submit" value="회원가입">
+    </form>
+
+    <hr>
+
+    <h3>텍스트와 관련된 input 태그들</h3>
+    <form>
+        <h4>■ type="text"</h4>
+        <p>
+            : 한 줄 짜리 텍스트를 입력할 수 있는 텍스트 상자
+        </p> 
+
+        <label>
+            아이디 : <input type="text" size="10" value="kh" name="userId"
+                            maxlegnth="10" placeholder="아이디를 입력해주세요.">
+        </label>
+
+        <h4>▣ type="text"에서 새로 추가된 기능</h4>
+        <p>
+            datalist 태그를 사용하여 텍스트 필드에서 데이터 목록 중에서 값을 선택하도록 만들 수 있음
+        </p>
+
+        <label>
+            색상 : <input type="text" name="color" list="myColors">
+        </label>
+
+        <datalist id="myColors">
+            <option value="black">검정색</option>
+            <option value="white">흰색</option>
+            <option value="skyblue">하늘색</option>
+        </datalist>
+
+        <h4>■ type="password"</h4>
+        <p>
+            : 비밀번호를 입력할 수 있는 텍스트 상자
+        </p>
+
+        <label>
+            비밀번호 : <input type="password" name="userPwd" size="20"
+                              maxlength="15" placeholder="비밀번호를 입력해주세요." required>
+        </label>
+
+        <h4>■ type="search", type="url", type="email", type="tel"</h4>
+        <p>
+            : 겉 모습은 텍스트필드와 비슷하지만
+              각각의 정보에 맞게 세분화 된 기능을 제공하는 텍스트 상자
+        </p>
+
+        <label>
+            검색 : <input type="search" name="searchText"
+                          placeholder="검색할 내용 입력">
+        </label>
+
+        <br><br>
+
+        <label>
+            홈페이지 : <input type="url" name="homepage" 
+                              value="https://">
+        </label>
+
+        <br><br>
+
+        <label>
+            이메일 : <input type="email" name="email" placeholder="이메일을 입력하세요.">
+        </label>
+
+        <br><br>
+
+        <label>
+            전화번호 : <input type="tel" name="phone" placeholder="전화번호를 입력하세요.">
+        </label>
+
+        <p></p>
+
+        <input type="submit" value="전송">
+        <input type="reset" value="다시 입력">
+    </form>
+
+    <hr>
+
+    <h3>숫자와 관련된 input 태그들</h3>
+
+    <form>
+        <h4>■ type="number"</h4>
+        <p>
+            : 입력창에 숫자를 입력하는 것이 기본이지만,
+              브라우저에 따라서 스핀 박스가 표시되기도 함
+              (* 스핀 박스 : 입력창 오른 쪽에 위/아래 화살표 표시)
+        </p>
+
+        <label>
+            수량 : <input type="number" name="amount" value="10" step="10"
+                          min="0" max="100">
+        </label>
+        
+        <h4>■ type="range"</h4>
+        <p>
+            : 슬라이드바를 통한 숫자 지정 가능
+        </p>
+
+        <input type="range" name="point" min="0" max="1000"
+               step=="100" style="width:300px";>
+
+        <br><br>
+
+        <input type="submit" value="전송">
+         <input type="reset" value="다시 입력">
+    </form>
+
+    <hr>
+
+    <h3>날짜/시간 관련된 input 태그</h3>
+    <form>  
+        <h4>■ type="date|month|week|time|datetime|datetime-local"</h4>
+
+        <label for="dataIn">date : </label>
+        <input type="date" name="dateIn" id="dateIn" value="2021-05-25">
+
+        <br><br>
+
+        <label for="monthIn">month</label>
+        <input type="month" name="monthIn" id="monthIn" value="2021-05-25">
+   
+        <br><br>
+
+        <label for="weekIn">week : </label>
+        <input type="week" name="weekIn" id="weekIn">
+
+        <br><br>
+
+        <label for="timeIn">time : </label>
+        <input type="time" name="timeIn" id="timeIn" value="23:30">
+
+        <br><br>
+
+        <label for="datetimeIn">datetime : </label>
+        <input type="datetime" name="datetimeIn" id="datetimeIn">
+
+        <br><br>
+
+        <label for="dtIn">datetime-local : </label>
+        <input type="datetime-local" name="dtIn" id="dtIn" value="2021-05-25T23:30:30"> 
+        
+        <br><br>
+
+        <input type="submit" value="전송">
+        <input type="reset" value="다시 입력">
+
+    </form>
+
+    <hr>    
+
+    <h3>라디오 버튼과 체크박스 태그</h3>
+
+    <form>
+        <h4>■ type="radio"</h4>
+        <p>
+            : 여러 항목 중 한 가지만 선택해야 할 경우에 사용하는 태그 <br>
+              라디오 버튼의 경우 관련된 버튼끼리는 name 속성이 같아야 하나만 선택 가능<br>
+              value 속성은 선택한 라디오 버튼이나 체크박스를 서버로 넘길 값을 지정<br>
+              checked 속성은 기본적으로 선택할 항목이 있다면 사용
+        </p>
+
+        <label>성별 : </label>
+        <label><input type="radio" name="gender" value="M">남자</label>
+        <label><input type="radio" name="gender" value="F" checked>여자</label>
+        
+        <h4>■ type="checkbox"</h4>
+        <p>
+            : 여러 항목 중 여러 가지 항목을 선택해야 할 경우에 사용하는 태그 <br>
+              체크박스의 경우, 관련된 체크박스끼리는 name 속성이 같아야 함
+        </p>
+
+        <label>취미 : </label>
+        <label><input type="checkbox" name="hobby" value="baseball">야구</label>
+        <label><input type="checkbox" name="hobby" value="football">축구</label>
+        <label><input type="checkbox" name="hobby" value="basketball">농구</label>
+        <label><input type="checkbox" name="hobby" value="game">게임</label>
+      
+        <br><br>
+    
+        <input type="submit" value="전송">
+        <input type="reset" value="다시 입력">
+    </form>
+
+    <hr>
+
+    <h3>추가 input 태그들</h3>
+    
+        <h4>■ type="color"</h4>
+        <label for="color">색상 선택 : </label>
+        <input type="color" name="color" id="color">
+
+        <h4>■ type="file"</h4>
+        <label for="file">파일 선택 : </label>
+        <input type="file" name="uploadfile" id="file">
+
+        <h4>■ type="hidden"</h4>
+        <label for="hiddenValue">안보임 : </label>
+        <!-- 특정 값을 화면에 노출시키지 않고 싶은 경우에 사용 -->
+        <input type="hidden" name="hiddenValue" id="hiddenValue" value="10">
+        
+        <h4>■ type="button", type="submit", type="reset"</h4>
+        <input type="button" value="버튼">
+        <input type="submit" value="전송">
+        <input type="reset" value="다시입력">
+
+        <h4>■ button 태그를 사용</h4>
+        <button>전송</button>
+        <br>
+        <button type="button" value="버튼">버튼</button>
+        <button type="submit" value="전송">전송</button>
+        <button type="reset" value="다시입력">다시입력</button>
+    </form>
+
+    <hr>
+
+    <h3>select 태그와 option 태그</h3>
+    <form>
+    <p>
+        :사용자가 내용을 입력하는 것이 아니고 
+         여러 옵션 중에서 선택하게 하고 싶을 때 사용하는 드롭 다운 목록
+    </p>
+
+    <label for="national">국적 : </label>
+    <select name="national" id="national">
+        <optgroup label="아시아">
+            <option value="ko">한국</option>
+            <option value="ch">중국</option>
+            <option value="jp">일본</option>
+        </optgroup>
+        <optgroup label="아메리카">
+            <option value="am" label="미국"></option>
+        </optgroup>
+        <optgroup label="유럽">
+            <option value="fr" label="프랑스"></option>
+        </optgroup>
+        <option selected>-----</option>
+    </select>
+
+    <br><br>
+
+    <h4>■ textarea 태그</h4>
+    <p>
+        : type="text"와 비슷하지만 여러 줄의 문자를 입력할 수 있음
+    </p>
+
+    <textarea name="textarea" id="textarea" cols="30" rows="10"
+              style="resize : none;" placeholder="내용을 입력해 주세요."></textarea>
+
+    <h4>■ progress</h4>
+    <p>
+        : 작업 진행 상태를 나타내는 태그 <br>
+          작업 시작을 0으로 하고, 최대값에서 얼마나 진행되었는지 표시함
+    </p>
+    <progress value="30" max="100"></progress>
+
+    
+    <h4>■ meter</h4>
+    <p>
+        : 전체 크기 중 얼마나 차지했는지 표현
+    </p>
+    <meter min="0" max="100" value="65" low="60" hi>gh="70"></meter>
+
+    <br><br>
+    
+    <input type="submit" id="submit" value="전송">
+    <input type="reset" id="reset" value="다시 입력">
+    
+    </form>
+
+</body>
+</html>

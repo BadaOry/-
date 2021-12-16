@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 가입 (강사님)</title>
+</head>
+<body>
+    <h1>회원가입</h1>
+
+    <>
+        <fieldset>
+            <legned>필수 입력 사항</legned>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <td>
+                        <input type="text" name="userId" size="30" placeholder="아이디 10글자 이내">
+                    </td>
+                    <td>
+                        <button>중복확인</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td colspan="2">
+                        <input type="password" name="userPwd" id="userPwd" size="30" placeholder="영문, 숫자, 특수문자 포함 8자 이상">
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호 확인</th>
+                    <td colspan="2">
+                        <input type="password" name="userPwd" id="userPwd" size="30" placeholder="영문, 숫자, 특수문자 포함 8자 이상">
+                    </td>
+                </tr>
+                <tr>
+                    <th>email</th>
+                    <td>
+                        <input type="email" name="email" id="email" size="30">
+                    </td>
+                    <td>
+                        <select name="emailAddr" id="emailAddr">
+                            <option value="">naver.com</option>
+                            <option value="">gmail.com</option>
+                            <option value="">daum.net</option>
+                            <option value="" selected>직접입력</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend>추가 정보</legend>
+
+            <label>프로필 사진 : <input type="file" name="profile" id="profile"></label>
+
+            <br><br>
+
+            <label>성별</label>
+            <label><input type="radio" name="gender" value="" cheked>남자</label>
+            <label><input type="radio" name="gender" value="">여자</label>
+
+            <br><br>
+
+            <label>생년월일 : <input type="date" name="birth" id="birth"></label>
+
+            <br><br>
+
+            <label>취미</label>
+
+            <br>
+
+            <label><input type="checkbox" name="hobby" value="">야구</label>
+            <label><input type="checkbox" name="hobby" value="">농구</label>
+            <label><input type="checkbox" name="hobby" value="">축구</label>
+
+            <br>
+
+            <label><input type="checkbox" name="hobby" value="" checked>공부</lable>
+            <label><input type="checkbox" name="hobby" value="">음악감상</lable>
+
+            <br>
+
+            <label><input type="checkbox" name="hobby" value="">기타 : </label>
+            <input type="text" name="" id="">
+
+
+            <br><br>
+
+            <label>자기소개</label>
+
+            <br>
+
+            <textarea name="introduce" cols="50" rows="5" style="resize:none;"></textarea>
+        </fieldset>
+
+        <p></p>
+        &nbsp;&nbsp;
+        <button type="submit">회원가입</button>
+        <button type="reset">다시입력</button>
+        <button type="button">이전으로</button>
+
+    </form>
+    
+</body>
+</html>
