@@ -1,21 +1,47 @@
 package com.kh.mvc.common.jdbc;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class JDBCTemplate {
 	public static Connection getConnection() {
 		// [ 커넥션을 가져와주는 로직 ] 
 		Connection connection = null;
+		// ▼ 설정을 가져오기 위해 변수 선언
+		Properties properties = new Properties();
+		// ▼ JDBCTemplate 파일의 물리적 경로를 담은 변수 선언
+		String filePath = JDBCTemplate.class.getResource("./driver.properties").getPath();
+		
+		// ▼ JDBCTemplate 파일의 물리적 위치를 출력
+//		System.out.println(filePath);
+		
 		
 		try {
-			// ▼ 커넥션 가져오는 코드
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "WEB", "WEB");
+//			// 방법 1)  커넥션 가져오는 코드 (하드코딩 아닌 ver)
+			// ▼ 파일을 읽어오는 FileInputStream 혹은 FileReader 를 만들어서 넘김 
+			properties.load(new FileReader(filePath));
+	
+			Class.forName(properties.getProperty("db.driver"));
+			
+			connection = DriverManager.getConnection(
+					properties.getProperty("db.url"),
+					properties.getProperty("db.username"), 
+					properties.getProperty("db.password")
+				);
+	
+			
+//			// 방법 2) 커넥션 가져오는 코드 (하드코딩 ver)
+//			//       : 최대한 하드코딩은 지양하는 걸로..
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//		
+//			connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "WEB", "WEB");
 		
 			// ▼ INSERT, DELETE, UPDATE 는 자동 커밋이 되므로, 오토 커밋을 끄는 코드
 			//  ex) insert1, insert2, update1 이 한개의 트랜젝션인 경우
@@ -30,6 +56,10 @@ public class JDBCTemplate {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		

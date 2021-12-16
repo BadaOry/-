@@ -21,7 +21,7 @@
 </head>
 <body>
 	<div id="updatePassword-container">
-		<form action="" method="post">
+		<form action="${ pageContext.request.contextPath }/member/updatePwd" method="post">
 			<table>
 				<tr>
 					<th>변경할 비밀번호</th>
@@ -47,6 +47,7 @@
 		</form>
 	</div>
 	<script>
+	<%-- ▼ 유효성 체크 --%>
 		function validate() {
 			let pass1 = $("#pass1").val();
 			let pass2 = $("#pass2").val();
@@ -63,15 +64,5 @@
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
 
 

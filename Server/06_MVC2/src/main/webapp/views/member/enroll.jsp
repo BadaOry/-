@@ -94,5 +94,37 @@
 	 	</form>
  	</div>
 </section>
+
+<script>
+	// 아이디 중복 확인
+	$(document).ready(() => {
+		$("#checkDuplicate").on("click", () => {
+			// ▼ 아이디 입력란에서 가져온 값을 변수로 선언
+			let userId = $("#newId").val().trim();
+			
+			// ▼ AJAX 로 중복체크 요청
+			$.ajax({
+				type: "post",
+				url: "${ pageContext.request.contextPath }/member/idCheck",
+				dataType: "json", 
+				data: {
+					userId
+				},
+				success: (data) => {
+					console.log(data)
+					
+					if(data.duplicate === true) {
+						alert("이미 사용중인 아이디 입니다.");
+					} else{
+						alert("사용 가능한 아이디 입니다.");
+					}
+				},
+				error: (error) => {
+					console.log(error);
+				}
+			});
+		});
+	});
+</script>
  
 <jsp:include page="/views/common/footer.jsp" />

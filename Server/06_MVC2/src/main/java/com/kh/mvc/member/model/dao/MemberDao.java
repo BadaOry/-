@@ -119,4 +119,88 @@ public class MemberDao {
 		return result;
 	}
 
+	public int updateMember(Connection connection, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE MEMBER SET NAME=?,PHONE=?,EMAIL=?,ADDRESS=?,HOBBY=?,MODIFY_DATE=SYSDATE WHERE NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			// ▼ ? 자리에 파라미터 값 넣어주기
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getPhone());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setString(4, member.getAddress());
+			pstmt.setString(5, member.getHobby());
+			pstmt.setInt(6, member.getNo());
+			
+			// ▼ 쿼리문 실행 후 업데이트 되는 행 개수를 result 에 담음
+			result = pstmt.executeUpdate();
+			
+			
+			/* 그런데 !! 수정 하고서도 바로 수정된 내용이 보이지 않고
+			 *         로그아웃 하고 다시 재접속 해야 수정된 내용으로 보임
+			 *  ▷ 로그인하는 시점에 DB 에 저장되어있는 Member 정보를 담아줌
+			 *  ▷ 그런데 정보를 수정하고 안바뀌는 이유는, 
+			 *     정보 수정한다 해서 로그인 했을때 가져온 Member 의 정보가 바뀌는 것은 아니기 때문임
+			 *     (= 회원정보 수정이 이미 로그인했을 떄 session 에 저장된 Member 정보를 바꾸냐? 그건 아님 !)
+			 *  ▶ 그래서 수정하자마자 변경되어 보이지는 않는 것임
+			 *  ▷ 해결 방법 두가지
+			 *     1) 회원 정보 수정 후, 정상적으로 수정되었으면
+			 *        session 을 갱신
+			 *     2) 로그인이 되면 myPageServlet 으로 가서 loginMember 의 아이디나 no 를
+			 *        DB 에서 찾아서, Member 객체를 가져와서 request 영역에 담아 포워딩
+			 *  ▶ 우리는 앞에서 loginMember 를 사용했기 때문에, 1) session 갱신 방법을 쓸 것임
+			 */
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateMemberStatus(Connection connection, int no, String status) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE MEMBER SET STATUS=? WHERE NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, status);
+			pstmt.setInt(2, no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateMemberPassword(Connection connection, int no, String password) {
+		int result = 0; 
+		PreparedStatement pstmt = null;
+		String query = "UPDATE MEMBER SET PASSWORD=? WHERE NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1,  password);
+			pstmt.setInt(2, no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

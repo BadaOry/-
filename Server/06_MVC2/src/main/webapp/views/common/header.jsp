@@ -54,9 +54,12 @@
 					</tr>
 					<tr>
 						<td>
-							<button>내 정보</button>
+							<!-- 뒤로가기 되어도 괜찮으니 location.href 사용-->
+							<!-- myPage.jsp 파일이 아니라 서블릿을 통해서 들어가는 것임 -->
+							<button onclick="location.href='${ path }/member/myPage'">내 정보</button>
 						</td>
 						<td>
+							<!-- 뒤로가기 안되게 하려고 location.replace 사용-->
 							<button onclick="location.replace('${ path }/logout')">로그아웃</button>
 						</td>
 					</tr>
@@ -65,8 +68,8 @@
 		</div>
 		<nav>
 			<ul class="main-nav">
-				<li class="home"><a href="/">Home</a></li>
-				<li id="board"><a href="/">게시판</a></li>
+				<li class="home"><a href="${ path }/">Home</a></li>
+				<li id="board"><a href="${ path }/board/list">게시판</a></li>
 			</ul>
 		</nav>
 	</header>
