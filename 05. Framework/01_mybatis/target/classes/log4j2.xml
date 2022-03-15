@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		■ Configuration : log4j 설정 파일의 최상단에 있는 설정 태그
+                       
+        	- status : 로그의 레벨 지정 
+        	           ▷ 로그 설정 파일을 읽어갈 때, 레벨에 따라 로그를 처리해 줌              
+    ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    
+<Configuration status="INFO">
+
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		■ Appenders : 로그의 출력 위치를 지정 (공식 문서에서 다양한 쓰임 확인 가능)
+                       ex. Console, File, OutputStream, DB ... 
+            
+            - name          : Appenders 를 구별하는 식별자 역할           
+        	- PatternLayout : 로그의 출력 포맷 지정  
+        		ㄴ [%-숫자level]  : 디버깅 레벨, 숫자 길이만큼 표시 (남으면 공백처리)        
+        		ㄴ %d (날짜 포맷)   : 날짜와 날짜 포맷
+        		ㄴ [%t]          : 스레드 이름
+        		ㄴ %c{숫자}       : 현재 클래스 기준으로 숫자 단계까지만 경로를 보여줌
+        		ㄴ %M            : 메소드 명 (어떤 메소드에서 실행되었는지)
+        		ㄴ %msg          : 로그 메세지 
+    ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+
+  <Appenders> 
+  	<Console name="console" target="SYSTEM_OUT">
+  		<PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{3} %M - %msg - %n "/>
+  	</Console>
+  	<File name="file1" fileName="./logs/member_log.txt">
+  		<PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{3} %M - %msg - %n "/>
+  	</File>
+  	<File name="file2" fileName="./logs/board_log.txt">
+  		<PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{3} %M - %msg - %n "/>
+  	</File>
+  </Appenders>
+  
+  
+  	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		■ Loggers : 로깅이 일어나는 부분을 그룹화하는 역할
+                    
+		■ Root : 일반적인 로그 정책을 의미
+        	     ex. 모든 로그 레벨은 INFO 이고, 
+        	         console 과 file 이라는 이름을 가진 Appenders 를 찾아서 거기에 로그를 찍어줄 것임
+        	
+        	- level 속성 : FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL
+        	              ▷ 선택한 레벨보다 높은 것들도 자동으로 출력됨
+        	                 ex. DEBUG 를 선택하면 FATAL ~ INFO 도 출력됨
+        		ㄴ FATAL : 아주 심각한 에러 발생 및 애플리케이션 구동 불가
+        		ㄴ ERROR : 일반적으로 실행하다가 나오는 예외들
+        		ㄴ WARN  : 에러는 아니지만 주의가 필요한 사항들
+        		ㄴ INFO  : 일반적인 정보들 (ex. 메소드 정보)
+        		ㄴ DEBUG : 디버깅 정보 
+        		ㄴ TRACE : 경로 추적
+        		ㄴ ALL   : 모든 로그 정보 출력
+    ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  
+  <Loggers>
+  	<Root level="DEBUG" additivity="false">
+  		<AppenderRef ref="console"/>
+  		<!-- <AppenderRef ref="file"/> -->
+  	</Root>
+  	
+  	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+  		추가로 필요한 로그 정책 정의 (패키지의 범위 설정)
+  		
+		■ Logger : 패키지 범위에 따라서 별도의 로그 설정 가능
+                    
+        	- name 속성 : 패키지 범위 설정
+        	- level 속성 : 로그 레벨
+        	- additivity 속성 : 중복 로깅 방지
+        	
+        ▼ com.kh.mybatis.member 패키지에 있는 애들만 DEBUG 레벨로
+          ./logs/member_log.txt 라는 파일에 저장해주겠다는 뜻
+    ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  	
+  	<Logger name="com.kh.mybatis.member" level="DEBUG" additivity="false">
+    	<AppenderRef ref="file1"/>
+  	</Logger>
+  	
+  	<Logger name="com.kh.mybatis.member" level="DEBUG" additivity="false">
+    	<AppenderRef ref="file2"/>
+  	</Logger>
+  	
+  </Loggers>
+</Configuration>

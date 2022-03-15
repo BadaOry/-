@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ▼ Mybatis 설정 파일임을 선언 (Mybatis 홈페이지에서 긁어옴) -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	▼ configuration : 설정을 위한 최상위 태그
+                      ▷ Mybatis 설정과 관련된 기본 설정들을 선언하는 영역
+                        * 작성 순서에 유의할 것
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+
+<configuration>
+
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		▼ properties : DB 연결 정보를 외부 properties 파일에서 불러오기 위해 선언하는 영역
+		
+			◆ 외부 파일 내용 외의 새로운 property 추가하는 경우 
+				: <property name="키" value="밸루" />	
+
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->	
+	
+	<properties resource="driver.properties"/>
+	
+	
+	<settings>
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		▼ 파라미터의 null 값에 대한 JDBC 타입 지정 ﻿
+			: 자바에서 null 을 넘기면, 
+			  실제로 JDBC 를 통해 값을 보낼때는 "OTHER" 라는 타입으로 넘어가고
+			  Oracle 에서는 당연히 그런 타입 없으니 에러가 남
+		      ▷  자바의 데이터 타입이 null 일 때, DB의 value 를 "NULL" 이라고 명시해주는 코드
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		▼ typeAliases : VO/DTO객체의 타입에 별칭을 선언하는 영역	
+	       			    * 만약 type 이 잘못 설정됐으면 ctrl 눌러도 클릭 안되니 참고 !
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	
+	<typeAliases>	
+		<typeAlias type="com.kh.mybatis.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.mybatis.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.mybatis.board.model.vo.Reply" alias="Reply"/>
+	</typeAliases>
+	
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		▼ environmemt : Database에 연결할 설정 정보들을 선언하는 영역 
+	
+			◆ default 속성 
+				: Database 에 연결 설정을 여러 개 생성할 수 있는데, 
+				  그 중에서 기본으로 연결할 설정 정보를 지정하는 속성
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	
+	<environments default="web">
+		<environment id="web">
+		
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		▼ transationManager : 트랜잭션을 관리해주는 태그
+		
+			◆ type 속성 
+				- JDBC : JDBC 가 commit, rollback을 직접 사용 가능하도록 하는 옵션 (=오토커밋 off)
+				- MANAGED : JDBC 가 트랜젝션에 대해 어떠한 영향도 행사하지 않는 옵션
+ 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+		
+		 <transactionManager type="JDBC"/>
+		 
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 
+		▼ dataSource : 실제 DB 접속에 관한 정보를 넣는 태그 (필수, 없으면 에러)
+			
+			◆ type 속성
+				- POOLED : 커넥션 객체를 미리 만들어서 POOL에 저장해서 사용하는 설정
+				           객체 생성 시간을 줄일 수 있음
+				- UNPOOLED : DB 요청이 올 때마다 커넥션 객체를 만들고 사용이 끝나면 닫는 설정
+				             커넥션 객체를 미리 만들어놓는 설정이 아니므로 상대적으로 느릴 수 있음
+	 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	 
+		<dataSource type="POOLED">
+		
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	        ▼ 하드 코딩 버전
+			<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+			<property name="username" value="WEB"/>
+			<property name="password" value="WEB"/>
+			
+			▼ 소프트 코딩 버전      
+	 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->                                           
+			<property name="driver" value="${db.driver}"/>
+			<property name="url" value="${db.url}"/>
+			<property name="username" value="${db.username}"/>
+			<property name="password" value="${db.password}"/>
+		</dataSource>
+		
+	</environment>
+		
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		▼ 아래와 같이 environment 태그는 여러 개 작성 할 수 있음
+		
+		<environment id="kh">
+			<dataSource type="POOLED">
+			<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+			<property name="username" value="KH"/>
+			<property name="password" value="KH"/>
+		</dataSource>
+		</environment>
+		
+		<environment id="student">
+		</environment>
+	 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ --> 
+		
+	</environments>
+	
+	<!-- ▼ mappers : DB에서 사용하는 쿼리문들을 담는 mapper 파일을 등록하는 영역 -->
+	<mappers>
+		<mapper resource="mappers/member/member-mapper.xml"/>
+		<mapper resource="mappers/board/board-mapper.xml"/>
+	</mappers>
+</configuration>
+  

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		AspectJ 어노테이션을 사용한 Aspect 적용을 위한 프록시 설정
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<bean id="character" class="com.kh.aop.character.Character" 
+		  p:name="무닌수" p:level="99" p:weapon-ref="bow"/>
+	
+	<bean id="sword" class="com.kh.aop.weapon.Sword" 
+	      p:name="정기점검" />
+	      
+	<bean id="bow" class="com.kh.aop.weapon.Bow" 
+	      p:name="활활활" />
+	
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		 Aspect 로 지정할 객체는 반드시 Bean 으로 선언되어야 함
+	     ex. xml, annotation 으로 설정 시에도 모두 Bean 으로 선언 필요
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	
+	<bean id="characterAspect" class="com.kh.aop.aspect.CharacterAspect" />
+
+	     
+	     
+	<!-- 
+	
+	<aop:config>
+
+		characterAspect 의 경우, 
+		 ▲ 여기까지는 일반 Bean 객체 었던게
+	     ▼ 여기서부터는 Aspect 객체로 바뀌는 것임  		
+
+		<aop:aspect ref="characterAspect">
+			▼ PointCut 중복 줄이는 코드 
+			<aop:pointcut id="questPointCut"
+						  expression="execution(* com.kh.aop.character.Character.quest(..))" />
+			
+			<aop:before 
+				pointcut="execution(* com.kh.aop.character.Character.quest(..))"
+				method="beforeQuest"/>
+			<aop:after 
+				pointcut="execution(* com.kh.aop.character.Character.quest(..))"
+				method="afterQuest"/>
+			 
+			 <aop:after-returning 
+				pointcut-ref="questPointCut"
+				method="questSuccess"/>
+				
+			 <aop:after-throwing 
+				pointcut-ref="questPointCut"
+				method="questFail"/>
+			 
+			 <aop:around
+			 	pointcut-ref="questPointCut"
+			 	method="questAdvice" />
+		</aop:aspect>
+	</aop:config>
+	
+	-->	
+	
+</beans>
+
