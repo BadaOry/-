@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: kuweb-replicaset
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: kuweb-label
+  template:
+    metadata:
+      name: kuweb-pod
+      labels:
+        app: kuweb-label
+    spec:
+      containers:
+        - name: kuweb
+          image: testweb:1.0
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+          - containerPort: 8080
+            protocol: TCP

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuweb-pod
+  labels:
+    name: kuweb-label
+spec:
+  containers:
+    - name: kuweb
+      image: testweb:1.0
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+    - name: alpine-linux
+      image: alpine:latest
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      command: ["tail"]
+      args: ["-f", "/dev/null"]

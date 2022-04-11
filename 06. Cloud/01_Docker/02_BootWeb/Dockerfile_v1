@@ -1,0 +1,17 @@
+# ▼ 베이스 이미지를 openjdk:11 로 지정
+FROM openjdk:11
+# ▼ 작성자 라벨 생성
+LABEL maintainer "kh<kh@iei.com>"
+# ▼ 버전 라벨 생성
+LABEL version="1.0"
+# ▼ 컨테이너 안의 /root 디렉토리에 빌드 컨텍스트 안에 있는 05_SpringBoot_MVC-0.0.1-SNAPSHOT.jar 파일 추가
+COPY 05_SpringBoot_MVC-0.0.1-SNAPSHOT.jar /root
+# ▼ Timezone 환경변수를 Asia/Seoul 로 변경
+ENV TZ=Asia/Seoul
+# ▼ 프롬프트에서 내부적으로 디렉토리 이동시키기 (=cd)
+WORKDIR /root
+# ▼ 이미지에서 8088 포트 사용
+EXPOSE 8088
+# ▼ 컨테이너 실행 시 가장 먼저 실행시킬 명령어 : java 파일 자동 실행
+#    * WORKDIR 로 작업 디렉토리를 바꿔놔서, /root/05_Spring.. 하지 않아도 됨
+CMD ["java","-jar","05_SpringBoot_MVC-0.0.1-SNAPSHOT.jar","--spring.profiles.active=dev"]

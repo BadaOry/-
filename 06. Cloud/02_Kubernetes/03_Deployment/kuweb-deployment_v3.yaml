@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuweb-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kuweb-label
+  template:
+    metadata:
+      labels:
+        app: kuweb-label
+    spec:
+      containers:
+      - name: kuweb
+        image: testweb:3.0
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080

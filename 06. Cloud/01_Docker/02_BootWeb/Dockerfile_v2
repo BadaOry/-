@@ -1,0 +1,22 @@
+# ▼ 베이스 이미지를 openjdk:11 로 지정
+FROM openjdk:11
+# ▼ 작성자 라벨 생성
+LABEL maintainer "kh<kh@iei.com>"
+# ▼ 버전 라벨 생성
+LABEL version="1.0"
+# ▼ /컨테이너 안의 /root 디렉토리에 빌드 컨텍스트 안에 있는 05_SpringBoot_MVC-0.0.1-SNAPSHOT.jar 파일 추가
+COPY 05_SpringBoot_MVC-0.0.1-SNAPSHOT.jar /root
+# ▼ 내부로부터 값을 넘겨받을 수 있는 PORT, PROFILE 변수 선언
+#   * 디폴트 값은 = 를 사용해서 설정 가능
+ARG PORT=8088
+ARG PROFILE=dev
+# ▼ Timezone 환경변수를 Asia/Seoul 로 변경
+ENV TZ=Asia/Seoul
+# ▼ CMD 에 ARG 로 받아온 값을 적용시키기 위한 환경변수 설정
+ENV PROFILE_ENV=${PROFILE}
+# ▼ 프롬프트에서 내부적으로 디렉토리 이동시키기 (=cd)
+WORKDIR /root
+# ▼ 이미지에서 build 시점에 사용자가 넘겨준 포트 넘버 사용
+EXPOSE ${PORT}
+# ▼ 컨테이너 실행 시 java 파일 자동 실행
+CMD ["java","-jar", "05_SpringBoot_MVC-0.0.1-SNAPSHOT.jar","--spring.profiles.active=${PROFILE_ENV}"]
